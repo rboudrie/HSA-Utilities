@@ -29,7 +29,11 @@ from tkinter import *
 VERSION = 1.0
 SLEEPTIME = 3
 
-HOSTADDR = "192.168.1.219"
+#
+# This must be changed to the address of the Raspberry Pi on the CAN (clubhouse area network)
+# for this to work on machines within the HSA complex.
+#
+HOSTADDR = "hsaclub.ddns.net"
 PORT = 10004
 
 tkroot = Tk()
@@ -81,6 +85,7 @@ def sendToControl(jsonstuff):
     """ Connect to socket on client Pi and send control message """
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            print('beta\n');
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             s.settimeout(1)
             s.connect((HOSTADDR,PORT))
